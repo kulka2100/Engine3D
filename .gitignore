@@ -1,0 +1,8 @@
+.vs
+Engine3D/x64
+Engine3D/x64/Release
+Engine3D/Engine3D/Engine3D.vcxproj
+Engine3D/Engine3D/Engine3D.vcxproj.filters
+Engine3D/Engine3D/Engine3D.vcxproj.user
+Engine3D/Engine3D/x64/Release/Engine3D.exe.recipe
+/Engine3D/Engine3D/x64/Release
