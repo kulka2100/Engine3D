@@ -1,13 +1,12 @@
 #pragma comment(lib, "freeglut.lib")
 #include <GL/freeglut.h>
 #include <iostream>
-#include <chrono>
-#include <thread>
 #include <glm.hpp>
 #include <vec4.hpp>
 #include <ext/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale
 #include <ext/matrix_clip_space.hpp> // glm::perspective
 #include <ext/scalar_constants.hpp>
+#include "PrimitiveRenderer.h"
 
 
 
@@ -25,17 +24,21 @@ private:
     bool useDepthBuffer;
     bool running;
 
+    static GLfloat clearColor[4];
+    enum ProjectionType{ PERSPECTIVE, ORTHOGRAPHIC }; // Typ wyliczeniowy do okreœlenia rodzaju rzutowania
+    static ProjectionType projectionType; // Pole przechowuj¹ce aktualne rzutowanie
+
+
     static void display();
 
     static void reshape(int w, int h);
 
     static void keyboard(unsigned char key, int x, int y);
 
-    static void mouse(int button, int state, int x, int y) {
-        // Obs³uga myszy
-    }
+    static void mouse(int button, int state, int x, int y);
 
     static void timer(int value);
+
 
     void update() {
         // Aktualizacja logiki gry
@@ -43,12 +46,18 @@ private:
 
     //Metoda sluzaca do okreslenia trybu wyswietlania
     int getDisplayMode();
+    
 
-public:
     Engine(int argc, char** argv) {
         glutInit(&argc, argv);
-        windowId = -1; // Ustawienie domyœlnej wartoœci identyfikatora okna
     }
+
+public:
+
+    //Wskaznika na obiekt silnika
+    static Engine* engineInstance;
+  
+    static Engine& getInstance(int argc, char** argv);
 
     void setFullscreen(bool fullscreen) {
         this->fullscreen = fullscreen;
@@ -59,6 +68,30 @@ public:
         this->height = height;
     }
 
+    void setClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+
+
+    static GLfloat getRed() {
+        return clearColor[0];
+    }
+
+    static GLfloat getGreen() {
+        return clearColor[1];
+    }
+
+    static GLfloat getBlue() {
+        return clearColor[2];
+    }
+
+    static GLfloat getAlpha() {
+        return clearColor[3];
+    }
+
+
+    void run() {
+        glutMainLoop();
+    }
+
     void setFPS(int fps) {
         this->fps = fps;
     }
@@ -66,6 +99,7 @@ public:
     int getFPS() {
         return fps;
     }
+
     void setMouseEnabled(bool useMouse) {
         this->useMouse = useMouse;
     }
@@ -84,7 +118,18 @@ public:
 
     void createWindow(const char* title);
 
+    void setProjectionType(ProjectionType type) {
+        projectionType = type;
+    }
 
+    static ProjectionType getProjectionType() {
+        return projectionType;
+    }
+
+   
+
+    //Czyszczenie pamieci
+    void close();
 
 };
 
