@@ -6,8 +6,11 @@
 #include <ext/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale
 #include <ext/matrix_clip_space.hpp> // glm::perspective
 #include <ext/scalar_constants.hpp>
-#include "PrimitiveRenderer.h"
-
+#include "Cube.h"
+#include "Circle.h"
+#include "Rectangl.h"
+#include "Line.h"
+#include "Triangle.h"
 
 
 class Engine {

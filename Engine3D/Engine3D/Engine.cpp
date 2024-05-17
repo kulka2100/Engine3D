@@ -1,8 +1,9 @@
 #include "Engine.h"
 
+
 //Inicjalizacje
 GLfloat Engine::clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
-Engine::ProjectionType Engine::projectionType = Engine::ProjectionType::ORTHOGRAPHIC;
+Engine::ProjectionType Engine::projectionType = Engine::ProjectionType::PERSPECTIVE;
 Engine* Engine::engineInstance = nullptr;
 
 Engine& Engine::getInstance(int argc, char** argv) {
@@ -25,12 +26,32 @@ void Engine::display() {
      
      glClearColor(getRed(), getGreen(), getBlue(), getAlpha()); // Ustawienie koloru t³a
      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
- 
-     glColor3f(1.0f, 0.0f, 0.0f);
      glLoadIdentity();
-     PrimitiveRenderer::drawRectangle(-2.0, -2.0, 2.0, 2.0);
-     glColor3f(0.0f, 1.0f, 0.0f);
-     PrimitiveRenderer::drawCircle(2.0, 2.0, 4.0, 50);
+  
+    // Cube cube(2.0f);
+    // // Ustawienie pozycji szeœcianu
+    // cube.setPosition(0.0f, 0.0f, -3.0f);
+    //// cube.setColor(0, 1.0, 0.0, 0.0);
+    // // Narysowanie szeœcianu
+    // cube.draw();
+
+     Cube cube(2.0);
+     cube.setPosition(0.0, 0.0, -5.0);
+     cube.setRotate(45.0, 1.0, 1.0, 0.0);
+
+     cube.setColor(0, 0.0, 0.0, 0.0);
+     cube.setColor(1, 0.0, 0.0, 0.0);
+     cube.setColor(2, 0.0, 0.0, 0.0);
+     cube.setColor(3, 1.0, 0.0, 0.0);
+     cube.setColor(4, 1.0, 0.0, 0.0);
+     cube.setColor(5, 1.0, 0.0, 0.0);
+     cube.setColor(6, 1.0, 0.0, 0.0);
+     cube.setColor(7, 1.0, 0.0, 0.0);
+     cube.setColor(8, 1.0, 0.0, 0.0);
+
+    //// cube.setFullColor(0.0, 1.0, 1.0);
+     cube.draw();
+
      glutSwapBuffers();
    
 }
@@ -41,7 +62,7 @@ void Engine::reshape(int w, int h) {
         std::cout << "wybrano perspective" << std::endl;
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(45.0, (double)w / (double)h, -2.0, 10.0);
+        gluPerspective(60.0, (double)w / (double)h, 1.0, 100.0);
         glMatrixMode(GL_MODELVIEW);
     }
     else {
@@ -51,13 +72,6 @@ void Engine::reshape(int w, int h) {
         glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
         glMatrixMode(GL_MODELVIEW);
     }
-
-    //glMatrixMode(GL_PROJECTION);
-    //glLoadIdentity();
-    //gluOrtho2D(-10, 10, -10, 10);
-    //glMatrixMode(GL_MODELVIEW);
-
-
 }
 
 
@@ -81,7 +95,6 @@ void Engine::timer(int value) {
     if (engineInstance) {
             glutPostRedisplay();
             glutTimerFunc(1000 / engineInstance->getFPS(), timer, 0);
-            std::cout << engineInstance->getFPS() <<" FPS" << std::endl;
         }
 }
 
@@ -146,7 +159,7 @@ int main(int argc, char** argv) {
     engine.setMouseEnabled(true);
     engine.setKeyboardEnabled(true);
     engine.setDoubleBuffering(true);
-    engine.setDepthBuffer(false);
+    engine.setDepthBuffer(true);
     engine.setClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
     engine.createWindow("OpenGL Engine");
