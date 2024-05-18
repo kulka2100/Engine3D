@@ -11,6 +11,7 @@
 #include "Rectangl.h"
 #include "Line.h"
 #include "Triangle.h"
+#include "Shad.h"
 
 
 class Engine {
@@ -129,6 +130,8 @@ public:
         return projectionType;
     }
 
+
+    
    
 
     //Czyszczenie pamieci

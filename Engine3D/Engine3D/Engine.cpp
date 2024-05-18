@@ -27,13 +27,6 @@ void Engine::display() {
      glClearColor(getRed(), getGreen(), getBlue(), getAlpha()); // Ustawienie koloru t³a
      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
      glLoadIdentity();
-  
-    // Cube cube(2.0f);
-    // // Ustawienie pozycji szeœcianu
-    // cube.setPosition(0.0f, 0.0f, -3.0f);
-    //// cube.setColor(0, 1.0, 0.0, 0.0);
-    // // Narysowanie szeœcianu
-    // cube.draw();
 
      Cube cube(2.0);
      cube.setPosition(0.0, 0.0, -5.0);
@@ -119,6 +112,12 @@ void Engine::createWindow(const char* title) {
         glutInitWindowPosition(100, 100);
         windowId = glutCreateWindow(title);
     }
+
+    Shad shad;
+    shad.setLightPos(1.0f, 0.0f, 0.0f, 1.0f);
+    shad.setLightAmbient(1.0f, 1.0f, 1.0f, 1.0f);
+    shad.setMatShininess(0.0);
+    shad.init();
 
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
