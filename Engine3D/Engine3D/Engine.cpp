@@ -28,6 +28,9 @@ void Engine::display() {
      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
      glLoadIdentity();
 
+     glm::mat4 view = engineInstance->camera.getViewMatrix();
+     glLoadMatrixf(glm::value_ptr(view));
+
      Cube cube(2.0);
      cube.setPosition(0.0, 0.0, -5.0);
      cube.setRotate(45.0, 1.0, 1.0, 0.0);
@@ -69,13 +72,48 @@ void Engine::reshape(int w, int h) {
 
 
 void Engine::keyboard(unsigned char key, int x, int y) {
+    float cameraSpeed = 0.5f;
     switch (key) {
     case 27: // Escape key
         exit(0);
         break;
+    case 'w':
+        engineInstance->camera.move(engineInstance->camera.getFront() * cameraSpeed);
+        break;
+    case 's':
+        engineInstance->camera.move(-engineInstance->camera.getFront() * cameraSpeed);
+        break;
+    case 'a':
+        engineInstance->camera.move(-engineInstance->camera.getRight() * cameraSpeed);
+        break;
+    case 'd':
+        engineInstance->camera.move(engineInstance->camera.getRight() * cameraSpeed);
+        break;
     default:
         break;
     }
+    glutPostRedisplay();
+}
+
+void Engine::specialKeys(int key, int x, int y) {
+    float rotationSpeed = 1.0f;
+    switch (key) {
+    case GLUT_KEY_UP:
+        engineInstance->camera.rotate(rotationSpeed, 0);
+        break;
+    case GLUT_KEY_DOWN:
+        engineInstance->camera.rotate(-rotationSpeed, 0);
+        break;
+    case GLUT_KEY_LEFT:
+        engineInstance->camera.rotate(0, -rotationSpeed);
+        break;
+    case GLUT_KEY_RIGHT:
+        engineInstance->camera.rotate(0, rotationSpeed);
+        break;
+    default:
+        break;
+    }
+    glutPostRedisplay();
 }
 
 void Engine::mouse(int button, int state, int x, int y) {
@@ -123,8 +161,10 @@ void Engine::createWindow(const char* title) {
     glutReshapeFunc(reshape);
     if (useMouse)
         glutMouseFunc(mouse);
-    if (useKeyboard)
+    if (useKeyboard) {
         glutKeyboardFunc(keyboard);
+        glutSpecialFunc(specialKeys);
+    }
 
     glutTimerFunc(0, timer, 0); // Uruchamiamy czasomierz
 

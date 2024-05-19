@@ -12,6 +12,8 @@
 #include "Line.h"
 #include "Triangle.h"
 #include "Shad.h"
+#include <GL/glut.h>
+#include "Camera.h"
 
 
 class Engine {
@@ -27,6 +29,7 @@ private:
     bool doubleBuffering;
     bool useDepthBuffer;
     bool running;
+    Camera camera;
 
     static GLfloat clearColor[4];
     enum ProjectionType{ PERSPECTIVE, ORTHOGRAPHIC }; // Typ wyliczeniowy do okreœlenia rodzaju rzutowania
@@ -38,6 +41,8 @@ private:
     static void reshape(int w, int h);
 
     static void keyboard(unsigned char key, int x, int y);
+
+    static void specialKeys(int key, int x, int y); //obsluga klawiszy do poruszania kamera
 
     static void mouse(int button, int state, int x, int y);
 
