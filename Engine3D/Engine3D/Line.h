@@ -3,7 +3,9 @@
 #include <iostream>
 #include <glm.hpp>
 #include <vec4.hpp>
-class Line {
+#include "ShapeObject.h"
+
+class Line : public ShapeObject {
 private:
     float x1;
     float y1;

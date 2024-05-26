@@ -194,7 +194,7 @@ int main(int argc, char** argv) {
     Engine::engineInstance = &Engine::getInstance(argc, argv);
     engine.setFullscreen(false);
     engine.setWindowSize(1024, 768);
-    engine.setFPS(30);
+    engine.setFPS(60);
     engine.setMouseEnabled(true);
     engine.setKeyboardEnabled(true);
     engine.setDoubleBuffering(true);

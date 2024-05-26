@@ -1,8 +1,9 @@
 #pragma once
 #include <GL/freeglut.h>
 #include <vector>
+#include "ShapeObject.h"
 
-class Cube {
+class Cube : public ShapeObject {
 private:
     float size; // Rozmiar szeœcianu
     float position[3] = { 0.0f, 0.0f, 0.0f }; // Pozycja szeœcianu

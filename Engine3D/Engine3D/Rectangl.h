@@ -3,8 +3,9 @@
 #include <iostream>
 #include <glm.hpp>
 #include <vec4.hpp>
+#include "ShapeObject.h"
 
-class Rectangl {
+class Rectangl : public ShapeObject {
 private:
     float x;
     float y;

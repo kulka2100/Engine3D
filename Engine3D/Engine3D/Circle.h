@@ -3,8 +3,9 @@
 #include <iostream>
 #include <glm.hpp>
 #include <vec4.hpp>
+#include "ShapeObject.h"
 
-class Circle{
+class Circle : public ShapeObject{
 private:
 	float cx;
 	float cy;

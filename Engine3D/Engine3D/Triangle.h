@@ -3,8 +3,9 @@
 #include <iostream>
 #include <glm.hpp>
 #include <vec4.hpp>
+#include "ShapeObject.h"
 
-class Triangle{
+class Triangle : public ShapeObject {
 private:
     float x1, x2, y1, y2, x3, y3;
     float r, g, b;
