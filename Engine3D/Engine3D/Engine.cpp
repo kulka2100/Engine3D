@@ -32,10 +32,13 @@ void Engine::display() {
      glLoadMatrixf(glm::value_ptr(view));
 
      Cube cube(2.0);
-     cube.setPosition(0.0, 0.0, -5.0);
-     cube.setRotate(45.0, 1.0, 1.0, 0.0);
+     cube.setPosition(0.0f, 0.0f, -5.0f);
+     cube.scale(1.0, 1.0, 1.0);
+     cube.rotate(45.0, 1.0, 0.0, 1.0);
+     cube.translate(1.0, 1.0, -3.0);
 
-     cube.setColor(0, 0.0, 0.0, 0.0);
+
+  /*   cube.setColor(0, 0.0, 0.0, 0.0);
      cube.setColor(1, 0.0, 0.0, 0.0);
      cube.setColor(2, 0.0, 0.0, 0.0);
      cube.setColor(3, 1.0, 0.0, 0.0);
@@ -43,9 +46,9 @@ void Engine::display() {
      cube.setColor(5, 1.0, 0.0, 0.0);
      cube.setColor(6, 1.0, 0.0, 0.0);
      cube.setColor(7, 1.0, 0.0, 0.0);
-     cube.setColor(8, 1.0, 0.0, 0.0);
+     cube.setColor(8, 1.0, 0.0, 0.0);*/
 
-    //// cube.setFullColor(0.0, 1.0, 1.0);
+     cube.setFullColor(0.0, 1.0, 1.0);
      cube.draw();
 
      glutSwapBuffers();

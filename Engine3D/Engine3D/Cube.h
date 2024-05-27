@@ -1,13 +1,13 @@
 #pragma once
 #include <GL/freeglut.h>
 #include <vector>
+#include <ext/matrix_transform.hpp> 
 #include "ShapeObject.h"
 
 class Cube : public ShapeObject {
 private:
     float size; // Rozmiar szeœcianu
-    float position[3] = { 0.0f, 0.0f, 0.0f }; // Pozycja szeœcianu
-    float angle, xr, yr, zr;
+    glm::mat4 modelMatrix;
     
 
     std::vector<float> vertices; // Tablica wierzcho³ków
@@ -27,7 +27,7 @@ private:
 
 public:
     // Konstruktor
-    Cube(float size) : size(size) {
+    Cube(float size) : size(size), modelMatrix(glm::mat4(1.0)) {
         // Inicjalizacja tablic wierzcho³ków
         initVertices();
     }
@@ -35,15 +35,22 @@ public:
     // Metoda rysuj¹ca szeœcian
     void draw();
 
-    // Metoda ustawiaj¹ca pozycjê szeœcianu
-    void setPosition(float x, float y, float z);
-
     //Metoda ustawiajaca kolor wierzcholka szescianu
     void setColor(int index, float r, float g, float b);
 
     //Metoda ustawiajaca kolor calego szescianu
     void setFullColor(float r, float g, float b);
 
-    //Metoda ustajaca paramtetry obrotu szescianu
-    void setRotate(float angle, float xr, float yr, float zr);
+    //Metoda ustawiajaca pozycje szescianu
+    void setPosition(float x, float y, float z);
+
+    //Metoda do translacji szescianu
+    void translate(float tx, float ty, float tz);
+
+    //Metoda obracajaca szescian
+    void rotate(float angle, float rx, float ry, float rz);
+
+    //Metoda skalujaca szescian
+    void scale(float sx, float sy, float sz);
+
 };

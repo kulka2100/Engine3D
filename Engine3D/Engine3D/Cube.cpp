@@ -55,16 +55,11 @@ void Cube::initVertices() {
 
 void Cube::draw() {
     glPushMatrix();
+
+    glMultMatrixf(&modelMatrix[0][0]);
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
-
-    // Przesuniêcie szeœcianu do odpowiedniej pozycji
-    glTranslatef(position[0], position[1], position[2]);
-
-    glRotatef(angle, xr, yr, zr);
-
-
 
     // Rysowanie szeœcianu
     glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
@@ -73,13 +68,6 @@ void Cube::draw() {
     glDrawElements(GL_QUADS, sizeof(indices), GL_UNSIGNED_BYTE, indices);
 
     glPopMatrix();
-}
-
-
-void Cube::setPosition(float x, float y, float z) {
-    position[0] = x;
-    position[1] = y;
-    position[2] = z;
 }
 
 
@@ -102,9 +90,20 @@ void Cube::setFullColor(float r, float g, float b) {
     }
 }
 
-void Cube::setRotate(float angle, float xr, float yr, float zr) {
-    this->angle = angle;
-    this->xr = xr;
-    this->yr = yr;
-    this->zr = zr;
+
+void Cube::setPosition(float x, float y, float z) {
+    modelMatrix = glm::translate(modelMatrix, glm::vec3(x, y, z));
+}
+
+void Cube::scale(float sx, float sy, float sz) {
+    modelMatrix = glm::scale(modelMatrix, glm::vec3(sx, sy, sz));
+}
+
+void Cube::rotate(float angle, float rx, float ry, float rz) {
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(90.0f), glm::vec3(rx, ry, rz));
+}
+
+
+void Cube::translate(float tx, float ty, float tz) {
+    modelMatrix = glm::translate(modelMatrix, glm::vec3(tx, ty, tz));
 }
