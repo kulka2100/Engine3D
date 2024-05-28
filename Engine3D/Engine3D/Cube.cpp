@@ -100,7 +100,7 @@ void Cube::scale(float sx, float sy, float sz) {
 }
 
 void Cube::rotate(float angle, float rx, float ry, float rz) {
-    modelMatrix = glm::rotate(modelMatrix, glm::radians(90.0f), glm::vec3(rx, ry, rz));
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(angle), glm::vec3(rx, ry, rz));
 }
 
 

@@ -14,6 +14,7 @@
 #include "Shad.h"
 #include <GL/glut.h>
 #include "Camera.h"
+#include "Pyramid.h"
 
 
 class Engine {

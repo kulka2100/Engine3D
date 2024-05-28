@@ -31,23 +31,18 @@ void Engine::display() {
      glm::mat4 view = engineInstance->camera.getViewMatrix();
      glLoadMatrixf(glm::value_ptr(view));
 
+     Pyramid pyramid(4.0f);
+     pyramid.setPosition(0.0, -1.0, -6.0);
+     //pyramid.rotate(45.0, 0.0, 0.0, 1.0);
+     pyramid.draw();
+
+
+
      Cube cube(2.0);
      cube.setPosition(0.0f, 0.0f, -5.0f);
      cube.scale(1.0, 1.0, 1.0);
      cube.rotate(45.0, 1.0, 0.0, 1.0);
      cube.translate(1.0, 1.0, -3.0);
-
-
-  /*   cube.setColor(0, 0.0, 0.0, 0.0);
-     cube.setColor(1, 0.0, 0.0, 0.0);
-     cube.setColor(2, 0.0, 0.0, 0.0);
-     cube.setColor(3, 1.0, 0.0, 0.0);
-     cube.setColor(4, 1.0, 0.0, 0.0);
-     cube.setColor(5, 1.0, 0.0, 0.0);
-     cube.setColor(6, 1.0, 0.0, 0.0);
-     cube.setColor(7, 1.0, 0.0, 0.0);
-     cube.setColor(8, 1.0, 0.0, 0.0);*/
-
      cube.setFullColor(0.0, 1.0, 1.0);
      cube.draw();
 
@@ -154,11 +149,11 @@ void Engine::createWindow(const char* title) {
         windowId = glutCreateWindow(title);
     }
 
-    Shad shad;
-    shad.setLightPos(1.0f, 0.0f, 0.0f, 1.0f);
-    shad.setLightAmbient(1.0f, 1.0f, 1.0f, 1.0f);
-    shad.setMatShininess(0.0);
-    shad.init();
+    //Shad shad;
+    //shad.setLightPos(1.0f, 0.0f, 0.0f, 1.0f);
+    //shad.setLightAmbient(1.0f, 1.0f, 1.0f, 1.0f);
+    //shad.setMatShininess(0.0);
+    //shad.init();
 
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
