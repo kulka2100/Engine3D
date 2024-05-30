@@ -7,6 +7,7 @@
 #include <ext/matrix_clip_space.hpp> // glm::perspective
 #include <ext/scalar_constants.hpp>
 #include "Cube.h"
+#include "Sphere.h"
 #include "Circle.h"
 #include "Rectangl.h"
 #include "Line.h"

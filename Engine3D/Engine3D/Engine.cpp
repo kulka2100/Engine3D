@@ -37,14 +37,19 @@ void Engine::display() {
      pyramid.draw();
 
 
+     Sphere sp(10.0, 60, 60);
+     sp.setColor(1.0, 0.5, 1.0);
+     sp.translate(0.0, 0.0, -50.0);
+     sp.draw();
 
-     Cube cube(2.0);
+
+  /*   Cube cube(2.0);
      cube.setPosition(0.0f, 0.0f, -5.0f);
      cube.scale(1.0, 1.0, 1.0);
      cube.rotate(45.0, 1.0, 0.0, 1.0);
      cube.translate(1.0, 1.0, -3.0);
      cube.setFullColor(0.0, 1.0, 1.0);
-     cube.draw();
+     cube.draw();*/
 
      glutSwapBuffers();
    
