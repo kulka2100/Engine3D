@@ -34,7 +34,7 @@ public:
         return height;
     }
 
-    void drawRectangle();
+    void draw() override;
 
     void setColor(float r, float g, float b);
 

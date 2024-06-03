@@ -3,6 +3,7 @@
 #include <vector>
 #include <ext/matrix_transform.hpp> 
 #include <corecrt_math_defines.h>
+#include <glm.hpp>
 #include "ShapeObject.h"
 
 
@@ -16,7 +17,7 @@ private:
     std::vector<GLfloat> colors;
     glm::mat4 modelMatrix;
 
-
+    
     void generateVertices();
 
 
@@ -27,19 +28,22 @@ public:
         generateVertices();
     }
 
-    void draw();
+
+    void draw() override;
 
 
     void setColor(float red, float green, float blue);
 
     
-
+    
     void scale(float sx, float sy, float sz);
 
     void rotate(float angle, float rx, float ry, float rz);
-
+    
 
     void translate(float tx, float ty, float tz);
 
+    void setPosition(float x, float y, float z);
+    
 };
 

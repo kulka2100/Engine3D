@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 #include <iostream>
+#include <gtc/matrix_transform.hpp> 
+#include <glm.hpp>
 
 /**
  * @brief klasa reprezentujaca transormowalny obiekt ksztaltu, dziedziczaca po GameObject
@@ -14,13 +16,8 @@ public:
       */
     TransformableObject();
 
-
-    void getInfo() {
-        std::cout << "Im transfromable class" << std::endl;
-    }
     /**
      * @brief destruktor wirtualny
      */
     virtual ~TransformableObject();
-
 };

@@ -32,14 +32,14 @@ void Engine::display() {
      glLoadMatrixf(glm::value_ptr(view));
 
      Pyramid pyramid(4.0f);
-     pyramid.setPosition(0.0, -1.0, -6.0);
-     //pyramid.rotate(45.0, 0.0, 0.0, 1.0);
+     pyramid.setPosition(0.0f, -1.0f, -6.0f);
+     //pyramid.rotate(45.0, 50.0, 0.0, 1.0);
      pyramid.draw();
 
 
      Sphere sp(10.0, 60, 60);
      sp.setColor(1.0, 0.5, 1.0);
-     sp.translate(0.0, 0.0, -50.0);
+     sp.translate(0.0f, 0.0f, -50.0f);
      sp.draw();
 
 

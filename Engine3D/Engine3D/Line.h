@@ -33,7 +33,7 @@ public:
         return y2;
     }
 
-    void drawLine();
+    void draw() override;
 
     void setColor(float r, float g, float b);
 

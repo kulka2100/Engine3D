@@ -9,7 +9,7 @@ Rectangl:: Rectangl(float x, float y, float width, float height) {
 }
 
 
-void Rectangl::drawRectangle() {
+void Rectangl::draw() {
     glBegin(GL_QUADS);
     glVertex2f(x, y);
     glVertex2f(x + width, y);

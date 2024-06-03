@@ -14,5 +14,10 @@ public:
      */
     virtual ~DrawableObject();
 
+    /**
+     * @brief wirtualna metoda rysujaca figury
+     */
+    virtual void draw() = 0;
+
 };
 

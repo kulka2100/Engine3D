@@ -75,7 +75,10 @@ void Sphere::rotate(float angle, float rx, float ry, float rz) {
     modelMatrix = glm::rotate(modelMatrix, glm::radians(angle), glm::vec3(rx, ry, rz));
 }
 
-
 void Sphere::translate(float tx, float ty, float tz) {
     modelMatrix = glm::translate(modelMatrix, glm::vec3(tx, ty, tz));
+}
+
+void Sphere::setPosition(float x, float y, float z) {
+    modelMatrix = glm::translate(modelMatrix, glm::vec3(x, y, z));
 }

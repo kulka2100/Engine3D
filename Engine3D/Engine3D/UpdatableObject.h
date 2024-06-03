@@ -13,5 +13,10 @@ public:
      * @brief destruktor wirtualny
      */
     virtual ~UpdatableObject();
+
+    /**
+     * @brief wirtualna metoda aktualizujaca figury
+     */
+    virtual void update() = 0;
 };
 

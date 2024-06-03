@@ -40,7 +40,7 @@ public:
         return y3;
     }
 
-    void drawTriangle();
+    void draw() override;
 
     void setColor(float r, float g, float b);
 };

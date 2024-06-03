@@ -1,7 +1,7 @@
 #include "Triangle.h"
 
 
-void Triangle::drawTriangle() {
+void Triangle::draw() {
     glBegin(GL_TRIANGLES);
     glVertex2f(x1, y1);
     glVertex2f(x2, y2);

@@ -59,16 +59,12 @@ void Pyramid::draw() {
     glPopMatrix();
 }
 
-void Pyramid::setPosition(float x, float y, float z) {
-    modelMatrix = glm::translate(modelMatrix, glm::vec3(x, y, z));
+void Pyramid::scale(float sx, float sy, float sz) {
+    modelMatrix = glm::scale(modelMatrix, glm::vec3(sx, sy, sz));
 }
 
 void Pyramid::rotate(float angle, float rx, float ry, float rz) {
     modelMatrix = glm::rotate(modelMatrix, glm::radians(angle), glm::vec3(rx, ry, rz));
-}
-
-void Pyramid::scale(float sx, float sy, float sz) {
-    modelMatrix = glm::scale(modelMatrix, glm::vec3(sx, sy, sz));
 }
 
 void Pyramid::translate(float tx, float ty, float tz) {

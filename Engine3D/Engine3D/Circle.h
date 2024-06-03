@@ -27,7 +27,7 @@ public:
 		return radius;
 	}
 
-	void drawCircle();
+	void draw() override;
 
 	void setColor(float r, float g, float b);
 

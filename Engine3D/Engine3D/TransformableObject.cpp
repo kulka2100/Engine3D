@@ -3,5 +3,3 @@
 TransformableObject::TransformableObject() {}
 
 TransformableObject::~TransformableObject() {}
-
-

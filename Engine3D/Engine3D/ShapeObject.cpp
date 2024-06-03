@@ -1,5 +1,6 @@
 #include "ShapeObject.h"
 
-ShapeObject::ShapeObject() {}
+ShapeObject::ShapeObject() : modelMatrix(glm::mat4(1.0f)) {}
 
 ShapeObject::~ShapeObject() {}
+

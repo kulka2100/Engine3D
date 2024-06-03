@@ -33,7 +33,7 @@ public:
     }
 
     // Metoda rysuj¹ca szeœcian
-    void draw();
+    void draw() override;
 
     //Metoda ustawiajaca kolor wierzcholka szescianu
     void setColor(int index, float r, float g, float b);
@@ -41,16 +41,6 @@ public:
     //Metoda ustawiajaca kolor calego szescianu
     void setFullColor(float r, float g, float b);
 
-    //Metoda ustawiajaca pozycje szescianu
-    void setPosition(float x, float y, float z);
 
-    //Metoda do translacji szescianu
-    void translate(float tx, float ty, float tz);
-
-    //Metoda obracajaca szescian
-    void rotate(float angle, float rx, float ry, float rz);
-
-    //Metoda skalujaca szescian
-    void scale(float sx, float sy, float sz);
 
 };

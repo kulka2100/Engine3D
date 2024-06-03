@@ -7,7 +7,7 @@ Circle::Circle(float cx, float cy, float radius) {
 }
 
 
-void Circle::drawCircle() {
+void Circle::draw() {
 	glBegin(GL_TRIANGLE_FAN);
 	for (int i = 0; i < segments; ++i) {
 		float theta = 2.0f * 3.1415926f * float(i) / float(segments); // Wartoœæ k¹ta w radianach

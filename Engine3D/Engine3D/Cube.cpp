@@ -91,19 +91,4 @@ void Cube::setFullColor(float r, float g, float b) {
 }
 
 
-void Cube::setPosition(float x, float y, float z) {
-    modelMatrix = glm::translate(modelMatrix, glm::vec3(x, y, z));
-}
 
-void Cube::scale(float sx, float sy, float sz) {
-    modelMatrix = glm::scale(modelMatrix, glm::vec3(sx, sy, sz));
-}
-
-void Cube::rotate(float angle, float rx, float ry, float rz) {
-    modelMatrix = glm::rotate(modelMatrix, glm::radians(angle), glm::vec3(rx, ry, rz));
-}
-
-
-void Cube::translate(float tx, float ty, float tz) {
-    modelMatrix = glm::translate(modelMatrix, glm::vec3(tx, ty, tz));
-}
