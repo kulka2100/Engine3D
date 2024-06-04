@@ -7,7 +7,7 @@
 class Cube : public ShapeObject {
 private:
     float size; // Rozmiar szeœcianu
-    glm::mat4 modelMatrix;
+    //glm::mat4 modelMatrix;
     
 
     std::vector<float> vertices; // Tablica wierzcho³ków
@@ -27,7 +27,7 @@ private:
 
 public:
     // Konstruktor
-    Cube(float size) : size(size), modelMatrix(glm::mat4(1.0)) {
+    Cube(float size) : size(size) {
         // Inicjalizacja tablic wierzcho³ków
         initVertices();
     }

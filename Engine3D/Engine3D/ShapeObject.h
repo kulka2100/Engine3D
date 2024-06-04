@@ -21,10 +21,11 @@ public:
      */
     virtual ~ShapeObject();
 
+    void setPosition(float x, float y, float z);
 
+    void scale(float sx, float sy, float sz);
 
-    void setPosition(float x, float y, float z) {
-        modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z));
-    }
+    void rotate(float angle, float rx, float ry, float rz);
+
+    void translate(float tx, float ty, float tz);
 };
-

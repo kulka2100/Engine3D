@@ -55,7 +55,6 @@ void Cube::initVertices() {
 
 void Cube::draw() {
     glPushMatrix();
-
     glMultMatrixf(&modelMatrix[0][0]);
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);

@@ -11,7 +11,6 @@ private:
 	std::vector<float> vertices; // Tablica wierzcho³ków
 	std::vector<float> normals;  // Tablica normalnych
 	std::vector<float> colors;   // Tablica kolorów
-    //glm::mat4 modelMatrix;
 
    
 
@@ -27,22 +26,11 @@ private:
     void initVertices();
     
 public:
-
-	/*Pyramid(float size) : size(size), modelMatrix(glm::mat4(1.0f)) {
-        initVertices();
-	}*/
     Pyramid(float size) : size(size) {
         initVertices();
     }
 
     void draw() override;
-
-    void scale(float sx, float sy, float sz);
-
-    void rotate(float angle, float rx, float ry, float rz);
-
-
-    void translate(float tx, float ty, float tz);
 
 };
 

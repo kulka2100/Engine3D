@@ -5,7 +5,7 @@
 #include <vec4.hpp>
 #include "ShapeObject.h"
 
-class Circle : public ShapeObject{
+class Circle : public ShapeObject {
 private:
 	float cx;
 	float cy;
