@@ -155,11 +155,11 @@ void Engine::createWindow(const char* title) {
         windowId = glutCreateWindow(title);
     }
 
-    //Shad shad;
-    //shad.setLightPos(1.0f, 0.0f, 0.0f, 1.0f);
-    //shad.setLightAmbient(1.0f, 1.0f, 1.0f, 1.0f);
-    //shad.setMatShininess(0.0);
-    //shad.init();
+    Shad shad;
+    shad.setLightPos(1.0f, 0.0f, 0.0f, 1.0f);
+    shad.setLightAmbient(1.0f, 1.0f, 1.0f, 1.0f);
+    shad.setMatSpecular(1.0f, 1.0f, 1.0f, 1.0f);
+    shad.init();
 
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);

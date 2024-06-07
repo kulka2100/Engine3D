@@ -10,8 +10,10 @@ void Shad::init() {
     glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
     glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
 
-    glMaterialfv(GL_FRONT, GL_AMBIENT, matAmbient);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, matDiffuse);
+
+    glEnable(GL_COLOR_MATERIAL); // W≥πcz GL_COLOR_MATERIAL
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE); // åledü ambient i diffuse
+
     glMaterialfv(GL_FRONT, GL_SPECULAR, matSpecular);
     glMaterialfv(GL_FRONT, GL_SHININESS, matShininess);
 }
@@ -48,19 +50,19 @@ void Shad::setLightSpecular(float x, float y, float z, float w) {
     lightSpecular[3] = w;
 }
 
-void Shad::setMatAmbient(float x, float y, float z, float w) {
-    matAmbient[0] = x;
-    matAmbient[1] = y;
-    matAmbient[2] = z;
-    matAmbient[3] = w;
-}
-
-void Shad::setMatDiffuse(float x, float y, float z, float w) {
-    matDiffuse[0] = x;
-    matDiffuse[1] = y;
-    matDiffuse[2] = z;
-    matDiffuse[3] = w;
-}
+//void Shad::setMatAmbient(float x, float y, float z, float w) {
+//    matAmbient[0] = x;
+//    matAmbient[1] = y;
+//    matAmbient[2] = z;
+//    matAmbient[3] = w;
+//}
+//
+//void Shad::setMatDiffuse(float x, float y, float z, float w) {
+//    matDiffuse[0] = x;
+//    matDiffuse[1] = y;
+//    matDiffuse[2] = z;
+//    matDiffuse[3] = w;
+//}
 
 void Shad::setMatSpecular(float x, float y, float z, float w) {
     matSpecular[0] = x;
