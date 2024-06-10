@@ -32,6 +32,7 @@ private:
     bool useDepthBuffer;
     bool running;
     Camera camera;
+    
 
     static GLfloat clearColor[4];
     enum ProjectionType{ PERSPECTIVE, ORTHOGRAPHIC }; // Typ wyliczeniowy do okreœlenia rodzaju rzutowania
@@ -62,6 +63,7 @@ private:
     Engine(int argc, char** argv) {
         glutInit(&argc, argv);
     }
+    void drawControlPanel();
 
 public:
 

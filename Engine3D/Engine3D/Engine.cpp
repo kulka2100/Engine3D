@@ -21,6 +21,63 @@ void Engine::setClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a) {
     clearColor[3] = a;
 }
 
+void Engine::drawControlPanel() {
+    // Ustawienie trybu rysowania na 2D
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    gluOrtho2D(0, width, 0, height);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+
+    // Etykieta pierwszego przycisku
+    glColor3f(1.0f, 1.0f, 1.0f); // Bia³y kolor tekstu
+    glRasterPos2i(5, height - 17);
+    const unsigned char* label1 = (const unsigned char*)"Btn1";
+    glutBitmapString(GLUT_BITMAP_HELVETICA_12, label1);
+
+    // Rysowanie pierwszego przycisku
+    glColor3f(0.3f, 0.3f, 0.3f); // Ciemniejszy kolor przycisku
+    glBegin(GL_QUADS);
+    glVertex2i(2, height - 2);
+    glVertex2i(28, height - 2);
+    glVertex2i(28, height - 32);
+    glVertex2i(2, height - 32);
+    glEnd();
+
+    // Etykieta drugiego przycisku
+    glColor3f(1.0f, 1.0f, 1.0f); // Bia³y kolor tekstu
+    glRasterPos2i(5, height - 50);
+    const unsigned char* label2 = (const unsigned char*)"Btn2";
+    glutBitmapString(GLUT_BITMAP_HELVETICA_12, label2);
+
+    // Rysowanie drugiego przycisku
+    glColor3f(0.3f, 0.3f, 0.3f); // Ciemniejszy kolor przycisku
+    glBegin(GL_QUADS);
+    glVertex2i(2, height - 34);
+    glVertex2i(28, height - 34);
+    glVertex2i(28, height - 64);
+    glVertex2i(2, height - 64);
+    glEnd();
+
+    
+
+    // Rysowanie panelu
+    glColor3f(0.7f, 0.7f, 0.7f); // Jasnoszary kolor
+    glBegin(GL_QUADS);
+    glVertex2i(0, 600);
+    glVertex2i(30, 600);
+    glVertex2i(30, height);
+    glVertex2i(0, height);
+    glEnd();
+
+    // Przywrócenie poprzedniego trybu rysowania
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+}
 
 void Engine::display() {
      
@@ -30,6 +87,9 @@ void Engine::display() {
 
      glm::mat4 view = engineInstance->camera.getViewMatrix();
      glLoadMatrixf(glm::value_ptr(view));
+
+     // Rysowanie panelu kontrolnego
+     engineInstance->drawControlPanel();
 
      Pyramid pyramid(4.0f);
      pyramid.setPosition(0.0f, -1.0f, -6.0f);
