@@ -34,6 +34,7 @@ private:
     Camera camera;
     Pyramid pyramid;
     int engineMode;
+    bool lightEnabled;
     
 
     static GLfloat clearColor[4];
@@ -67,7 +68,7 @@ private:
     Engine(int argc, char** argv) {
         glutInit(&argc, argv);
     }*/
-    Engine(int argc, char** argv) : pyramid(4.0f), windowId(-1), fullscreen(false), width(800), height(600), fps(60), useMouse(true), useKeyboard(true), doubleBuffering(true), useDepthBuffer(true), running(true) {
+    Engine(int argc, char** argv) : pyramid(4.0f), windowId(-1), fullscreen(false), width(800), height(600), fps(60), useMouse(true), useKeyboard(true), doubleBuffering(true), useDepthBuffer(true), running(true), lightEnabled(false) {
         glutInit(&argc, argv);
     }
     void drawControlPanel();

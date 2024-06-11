@@ -1,41 +1,48 @@
 #pragma once
 #include <GL/freeglut.h>
+#include <ext/matrix_transform.hpp>
 #include <vector>
+#include <gtc/type_ptr.hpp>
 
-class Shad{
+class Shad {
 private:
-    // Ustawienia œwiat³a
-    float lightPos[4]{ 0.0f, 0.0f, 1.0f, 0.0f };        // Pozycja œwiat³a
-    float lightAmbient[4]{ 0.2f, 0.2f, 0.2f, 1.0f };    // Œwiat³o otoczenia
-    float lightDiffuse[4]{ 0.8f, 0.8f, 0.8f, 1.0f };    // Œwiat³o rozproszone
-    float lightSpecular[4]{ 1.0f, 1.0f, 1.0f, 1.0f };   // Œwiat³o odbite
+    // Ustawienia œwiat³a 
+    glm::vec4 lightPos{100.0f, 200.0f, 0.0f, 1.0f};
+    glm::vec4 lightAmbient{ 0.0f, 0.0f, 0.0f, 1.0f };
+    glm::vec4 lightDiffuse{ 0.0f, 0.0f, 0.0f, 1.0f };
+    glm::vec4 lightSpecular{ 0.0f, 0.0f, 0.0f, 1.0f };
+
 
     // Ustawienia materia³u 
-
-    float matSpecular[4]{ 0.5f, 0.5f, 0.5f, 1.0f }; // Materia³ odbicia
-    float matShininess[1] { 40.0f };                // Po³ysk materia³u
+    glm::vec4 matDiffuse {1.0, 1.0, 1.0, 1.0};
+    glm::vec4 matAmbient {1.0, 1.0, 1.0, 1.0};
+    glm::vec4 matSpecular {1.0, 1.0, 1.0, 1.0};
+    bool traceColor;
 
 public:
 
-    Shad() {
+    Shad() : traceColor(true) {
     }
 
     void init();
 
-    void setLightPos(float x, float y, float z, float w);
+    void setLightPos(glm::vec4 pos);
 
-    void setLightAmbient(float x, float y, float z, float w);
+    void setLightAmbient(glm::vec4 ambientLight);
 
-    void setLightDiffuse(float x, float y, float z, float w);
+    void setLightDiffuse(glm::vec4 diffuse);
 
-    void setLightSpecular(float x, float y, float z, float w);
+    void setLightSpecular(glm::vec4 specular);
 
-    //void setMatAmbient(float x, float y, float z, float w);
+    void setMatDiffuse(glm::vec4 matDiffuse);
 
-    //void setMatDiffuse(float x, float y, float z, float w);
+    //Metoda wlazcajaca sledzenie kolorow obiektow 
+    void setTraceColor(bool trace);
 
-    void setMatSpecular(float x, float y, float z, float w);
+    void setMatAmbient(glm::vec4 matAmbient);
 
-    void setMatShininess(float x);
+    void setMatSpecular(glm::vec4 specular);
+
 };
+
 

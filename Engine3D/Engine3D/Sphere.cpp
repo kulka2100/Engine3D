@@ -49,7 +49,7 @@ void Sphere::draw() {
     glEnableClientState(GL_COLOR_ARRAY);
 
     glVertexPointer(3, GL_FLOAT, 0, &vertices[0]);
-    glColorPointer(3, GL_FLOAT, 0, &colors[0]);
+    //glColorPointer(3, GL_FLOAT, 0, &colors[0]);
 
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, &indices[0]);
 

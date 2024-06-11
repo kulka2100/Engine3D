@@ -32,11 +32,11 @@ void Pyramid::initVertices() {
 
 
     colors = {
-       0.0f, 0.0f, 0.0f, // Przednia œciana
-       0.0f, 1.0f, 0.0f, // Lewa œciana
-       0.0f, 0.0f, 1.0f, // Prawa œciana
-       0.0f, 0.0f, 1.0f, // Tylna Prawa 
-       0.0f, 1.0f, 0.0f  // Tylna Lewa
+       1.0f, 0.0f, 0.0f, // Przednia œciana
+       1.0f, 0.0f, 0.0f, // Lewa œciana
+       1.0f, 0.0f, 0.0f, // Prawa œciana
+       1.0f, 0.0f, 0.0f, // Tylna Prawa 
+       1.0f, 0.0f, 0.0f  // Tylna Lewa
     };
 
 

@@ -36,6 +36,7 @@ void drawButton(GLuint textureID, int x, int y, int width, int height) {
 }
 
 void Engine::drawControlPanel() {
+    glDisable(GL_LIGHTING);
     // Ustawienie trybu rysowania na 2D
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
@@ -150,6 +151,7 @@ void Engine::drawControlPanel() {
     glVertex2i(0, height);
     glEnd();
 
+    glEnable(GL_LIGHTING);
     // Przywrócenie poprzedniego trybu rysowania
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
@@ -163,20 +165,25 @@ void Engine::display() {
      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
      glLoadIdentity();
 
+
      glm::mat4 view = engineInstance->camera.getViewMatrix();
      glLoadMatrixf(glm::value_ptr(view));
+
+     if (engineInstance->lightEnabled) {
+         glEnable(GL_LIGHTING);
+     }
+     else {
+         glDisable(GL_LIGHTING);
+     }
 
      // Rysowanie panelu kontrolnego
      engineInstance->drawControlPanel();
 
-     //Pyramid pyramid(4.0f);
-     //engineInstance->pyramid.setPosition(0.0f, -1.0f, -6.0f);
-     //pyramid.rotate(45.0, 50.0, 0.0, 1.0);
      engineInstance->pyramid.draw();
 
 
      Sphere sp(10.0, 60, 60);
-     sp.setColor(1.0, 0.5, 1.0);
+
      sp.translate(0.0f, 0.0f, -30.0f);
      sp.draw();
 
@@ -250,8 +257,8 @@ void Engine::specialKeys(int key, int x, int y) {
     float rotationSpeed = 1.0f;
     switch (key) {
     case GLUT_KEY_UP:
-        if (engineInstance->engineMode == 0)
-            engineInstance->camera.rotate(rotationSpeed, 0);
+        if (engineInstance->engineMode == 0) 
+            engineInstance->camera.rotate(rotationSpeed, 0);        
         else if (engineInstance->engineMode == 1)
             engineInstance->pyramid.translate(0.0f, 1.0f, 0.0f);
         else if (engineInstance->engineMode == 2)
@@ -309,7 +316,7 @@ void Engine::checkButtonClick(int x, int y) {
     }
     // Wlaczanie i wylaczanie swiatla
     else if (x >= 2 && x <= 56 && y >= 130 && y <= 160) {
-        // Wlaczenie i wylaczenie swiatla
+        engineInstance->engineMode = 4;
     }
     // Wlaczanie i wylaczanie cieni
     else if (x >= 2 && x <= 56 && y >= 162 && y <= 192) {
@@ -318,8 +325,24 @@ void Engine::checkButtonClick(int x, int y) {
 }
 
 void Engine::mouse(int button, int state, int x, int y) {
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
         checkButtonClick(x, y);
+        std::cout << engineInstance->engineMode;
+        if (engineInstance->engineMode == 4) {
+            std::cout << "wlaczam siwatlo";
+            //Wlaczanie i wylaczanie swiatala 
+            engineInstance->lightEnabled = !(engineInstance->lightEnabled);
+            if (engineInstance->lightEnabled) {
+                glEnable(GL_LIGHT0);
+            }
+            else {
+                glDisable(GL_LIGHT0);
+            }
+            engineInstance->engineMode = 0;
+          }
+
+    }
+     
  }
 
 void Engine::timer(int value) {
@@ -352,10 +375,18 @@ void Engine::createWindow(const char* title) {
         windowId = glutCreateWindow(title);
     }
 
+
+    //Ustawianie parametrow oswietlenia
     Shad shad;
-    shad.setLightPos(1.0f, 0.0f, 0.0f, 1.0f);
-    shad.setLightAmbient(1.0f, 1.0f, 1.0f, 1.0f);
-    shad.setMatSpecular(1.0f, 1.0f, 1.0f, 1.0f);
+    shad.setTraceColor(false);
+    shad.setLightAmbient(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f));
+    shad.setLightDiffuse(glm::vec4(1.0f, 0.1f, 0.1f, 1.0f));
+    shad.setLightSpecular(glm::vec4(0.4f, 0.4f, 0.3f, 1.0f));
+
+    shad.setMatDiffuse(glm::vec4(0.0, 0.0, 1.0, 1.0));
+    shad.setMatAmbient(glm::vec4(1.0, 1.0, 1.0, 1.0));
+    shad.setMatSpecular(glm::vec4(1.0, 1.0, 1.0, 1.0));
+
     shad.init();
 
     glutDisplayFunc(display);
@@ -393,7 +424,6 @@ int main(int argc, char** argv) {
     Engine& engine = Engine::getInstance(argc, argv);
     //Wskaznik do niego
     Engine::engineInstance = &Engine::getInstance(argc, argv);
-    //Engine::engineInstance = &engine;
     engine.setFullscreen(false);
     engine.setWindowSize(1024, 768);
     engine.setFPS(60);
@@ -401,7 +431,7 @@ int main(int argc, char** argv) {
     engine.setKeyboardEnabled(true);
     engine.setDoubleBuffering(true);
     engine.setDepthBuffer(true);
-    engine.setClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    //engine.setClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
     engine.createWindow("OpenGL Engine");
 
