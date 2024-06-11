@@ -1,5 +1,9 @@
 #include "Pyramid.h"
 
+Pyramid::Pyramid(float size) : size(size) {
+    initVertices();
+    this->setPosition(0.0f, -1.0f, -6.0f);
+}
 
 void Pyramid::initVertices() {
     float halfSize = size / 2.0f;
@@ -55,6 +59,10 @@ void Pyramid::draw() {
     glNormalPointer(GL_FLOAT, 0, normals.data());
     glColorPointer(3, GL_FLOAT, 0, colors.data());
     glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_BYTE, indices);
+
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
 
     glPopMatrix();
 }

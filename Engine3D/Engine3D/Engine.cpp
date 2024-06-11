@@ -21,6 +21,20 @@ void Engine::setClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a) {
     clearColor[3] = a;
 }
 
+
+void drawButton(GLuint textureID, int x, int y, int width, int height) {
+    // Rysuj teksturê przycisku na panelu kontrolnym
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0); glVertex2i(x, y);
+    glTexCoord2f(1, 0); glVertex2i(x + width, y);
+    glTexCoord2f(1, 1); glVertex2i(x + width, y + height);
+    glTexCoord2f(0, 1); glVertex2i(x, y + height);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
 void Engine::drawControlPanel() {
     // Ustawienie trybu rysowania na 2D
     glMatrixMode(GL_PROJECTION);
@@ -31,44 +45,108 @@ void Engine::drawControlPanel() {
     glPushMatrix();
     glLoadIdentity();
 
+
+
+
     // Etykieta pierwszego przycisku
     glColor3f(1.0f, 1.0f, 1.0f); // Bia³y kolor tekstu
-    glRasterPos2i(5, height - 17);
-    const unsigned char* label1 = (const unsigned char*)"Btn1";
+    glRasterPos2i(7, height - 21);
+    const unsigned char* label1 = (const unsigned char*)"Kamera";
     glutBitmapString(GLUT_BITMAP_HELVETICA_12, label1);
 
     // Rysowanie pierwszego przycisku
     glColor3f(0.3f, 0.3f, 0.3f); // Ciemniejszy kolor przycisku
     glBegin(GL_QUADS);
     glVertex2i(2, height - 2);
-    glVertex2i(28, height - 2);
-    glVertex2i(28, height - 32);
+    glVertex2i(56, height - 2);
+    glVertex2i(56, height - 32);
     glVertex2i(2, height - 32);
     glEnd();
 
+
     // Etykieta drugiego przycisku
     glColor3f(1.0f, 1.0f, 1.0f); // Bia³y kolor tekstu
-    glRasterPos2i(5, height - 50);
-    const unsigned char* label2 = (const unsigned char*)"Btn2";
+    glRasterPos2i(6, height - 53);
+    const unsigned char* label2 = (const unsigned char*)"Przesun";
     glutBitmapString(GLUT_BITMAP_HELVETICA_12, label2);
 
     // Rysowanie drugiego przycisku
     glColor3f(0.3f, 0.3f, 0.3f); // Ciemniejszy kolor przycisku
     glBegin(GL_QUADS);
     glVertex2i(2, height - 34);
-    glVertex2i(28, height - 34);
-    glVertex2i(28, height - 64);
+    glVertex2i(56, height - 34);
+    glVertex2i(56, height - 64);
     glVertex2i(2, height - 64);
     glEnd();
 
-    
+    // Etykieta trzeciego przycisku
+    glColor3f(1.0f, 1.0f, 1.0f); // Bia³y kolor tekstu
+    glRasterPos2i(11, height - 85);
+    const unsigned char* label3 = (const unsigned char*)"Obroc";
+    glutBitmapString(GLUT_BITMAP_HELVETICA_12, label3);
 
+    // Rysowanie trzeciego przycisku
+    glColor3f(0.3f, 0.3f, 0.3f); // Ciemniejszy kolor przycisku
+    glBegin(GL_QUADS);
+    glVertex2i(2, height - 66);
+    glVertex2i(56, height - 66);
+    glVertex2i(56, height - 96);
+    glVertex2i(2, height - 96);
+    glEnd();
+
+    // Etykieta czwartego przycisku
+    glColor3f(1.0f, 1.0f, 1.0f); // Bia³y kolor tekstu
+    glRasterPos2i(11, height - 117);
+    const unsigned char* label4 = (const unsigned char*)"Skaluj";
+    glutBitmapString(GLUT_BITMAP_HELVETICA_12, label4);
+
+    // Rysowanie czwartego przycisku
+    glColor3f(0.3f, 0.3f, 0.3f); // Ciemniejszy kolor przycisku
+    glBegin(GL_QUADS);
+    glVertex2i(2, height - 98);
+    glVertex2i(56, height - 98);
+    glVertex2i(56, height - 128);
+    glVertex2i(2, height - 128);
+    glEnd();
+
+    // Etykieta piatego przycisku
+    glColor3f(1.0f, 1.0f, 1.0f); // Bia³y kolor tekstu
+    glRasterPos2i(9, height - 149);
+    const unsigned char* label5 = (const unsigned char*)"Swiatlo";
+    glutBitmapString(GLUT_BITMAP_HELVETICA_12, label5);
+
+    // Rysowanie piatego przycisku
+    glColor3f(0.3f, 0.3f, 0.3f); // Ciemniejszy kolor przycisku
+    glBegin(GL_QUADS);
+    glVertex2i(2, height - 130);
+    glVertex2i(56, height - 130);
+    glVertex2i(56, height - 160);
+    glVertex2i(2, height - 160);
+    glEnd();
+
+    // Etykieta szostego przycisku
+    glColor3f(1.0f, 1.0f, 1.0f); // Bia³y kolor tekstu
+    glRasterPos2i(14, height - 181);
+    const unsigned char* label6 = (const unsigned char*)"Cien";
+    glutBitmapString(GLUT_BITMAP_HELVETICA_12, label6);
+
+    // Rysowanie szostego przycisku
+    glColor3f(0.3f, 0.3f, 0.3f); // Ciemniejszy kolor przycisku
+    glBegin(GL_QUADS);
+    glVertex2i(2, height - 162);
+    glVertex2i(56, height - 162);
+    glVertex2i(56, height - 192);
+    glVertex2i(2, height - 192);
+    glEnd();
+
+    
+   
     // Rysowanie panelu
     glColor3f(0.7f, 0.7f, 0.7f); // Jasnoszary kolor
     glBegin(GL_QUADS);
-    glVertex2i(0, 600);
-    glVertex2i(30, 600);
-    glVertex2i(30, height);
+    glVertex2i(0, 574);
+    glVertex2i(58, 574);
+    glVertex2i(58, height);
     glVertex2i(0, height);
     glEnd();
 
@@ -91,23 +169,20 @@ void Engine::display() {
      // Rysowanie panelu kontrolnego
      engineInstance->drawControlPanel();
 
-     Pyramid pyramid(4.0f);
-     pyramid.setPosition(0.0f, -1.0f, -6.0f);
+     //Pyramid pyramid(4.0f);
+     //engineInstance->pyramid.setPosition(0.0f, -1.0f, -6.0f);
      //pyramid.rotate(45.0, 50.0, 0.0, 1.0);
-     pyramid.draw();
+     engineInstance->pyramid.draw();
 
 
      Sphere sp(10.0, 60, 60);
      sp.setColor(1.0, 0.5, 1.0);
-     sp.translate(0.0f, 0.0f, -50.0f);
+     sp.translate(0.0f, 0.0f, -30.0f);
      sp.draw();
 
      /*
-     Cube cube(2.0);
+     Cube cube(150.0f);
      cube.setPosition(0.0f, 0.0f, -5.0f);
-     cube.scale(1.0, 1.0, 1.0);
-     cube.rotate(45.0, 1.0, 0.0, 1.0);
-     cube.translate(1.0, 1.0, -3.0);
      cube.setFullColor(0.0, 1.0, 1.0);
      cube.draw();
      */
@@ -142,16 +217,28 @@ void Engine::keyboard(unsigned char key, int x, int y) {
         exit(0);
         break;
     case 'w':
-        engineInstance->camera.move(engineInstance->camera.getFront() * cameraSpeed);
+        if (engineInstance->engineMode == 0)
+            engineInstance->camera.move(engineInstance->camera.getFront() * cameraSpeed);
+        else if (engineInstance->engineMode == 1) 
+            engineInstance->pyramid.translate(0.0f, 0.0f, -1.0f);
         break;
     case 's':
-        engineInstance->camera.move(-engineInstance->camera.getFront() * cameraSpeed);
+        if (engineInstance->engineMode == 0)
+            engineInstance->camera.move(-engineInstance->camera.getFront() * cameraSpeed);
+        else if (engineInstance->engineMode == 1)
+            engineInstance->pyramid.translate(0.0f, 0.0f, 1.0f);
         break;
     case 'a':
-        engineInstance->camera.move(-engineInstance->camera.getRight() * cameraSpeed);
+        if (engineInstance->engineMode == 0)
+            engineInstance->camera.move(-engineInstance->camera.getRight() * cameraSpeed);
+        else if (engineInstance->engineMode == 2)
+            engineInstance->pyramid.rotate(10.0f, 0.0f, 1.0f, 0.0f);
         break;
     case 'd':
-        engineInstance->camera.move(engineInstance->camera.getRight() * cameraSpeed);
+        if (engineInstance->engineMode == 0)
+            engineInstance->camera.move(engineInstance->camera.getRight() * cameraSpeed);
+        else if (engineInstance->engineMode == 2)
+            engineInstance->pyramid.rotate(10.0f, 0.0f, -1.0f, 0.0f);
         break;
     default:
         break;
@@ -163,16 +250,40 @@ void Engine::specialKeys(int key, int x, int y) {
     float rotationSpeed = 1.0f;
     switch (key) {
     case GLUT_KEY_UP:
-        engineInstance->camera.rotate(rotationSpeed, 0);
+        if (engineInstance->engineMode == 0)
+            engineInstance->camera.rotate(rotationSpeed, 0);
+        else if (engineInstance->engineMode == 1)
+            engineInstance->pyramid.translate(0.0f, 1.0f, 0.0f);
+        else if (engineInstance->engineMode == 2)
+            engineInstance->pyramid.rotate(10.0f, -1.0f, 0.0f, 0.0f);
+        else if (engineInstance->engineMode == 3)
+            engineInstance->pyramid.scale(1.1f, 1.1f, 1.1f);
         break;
     case GLUT_KEY_DOWN:
-        engineInstance->camera.rotate(-rotationSpeed, 0);
+        if (engineInstance->engineMode == 0)
+            engineInstance->camera.rotate(-rotationSpeed, 0);
+        else if (engineInstance->engineMode == 1)
+            engineInstance->pyramid.translate(0.0f, -1.0f, 0.0f);
+        else if (engineInstance->engineMode == 2)
+            engineInstance->pyramid.rotate(10.0f, 1.0f, 0.0f, 0.0f);
+        else if (engineInstance->engineMode == 3)
+            engineInstance->pyramid.scale(0.9f, 0.9f, 0.9f);
         break;
     case GLUT_KEY_LEFT:
-        engineInstance->camera.rotate(0, -rotationSpeed);
+        if (engineInstance->engineMode == 0)
+            engineInstance->camera.rotate(0, -rotationSpeed);
+        else if (engineInstance->engineMode == 1)
+            engineInstance->pyramid.translate(-1.0f, 0.0f, 0.0f);
+        else if (engineInstance->engineMode == 2)
+            engineInstance->pyramid.rotate(10.0f, 0.0f, 0.0f, 1.0f);
         break;
     case GLUT_KEY_RIGHT:
-        engineInstance->camera.rotate(0, rotationSpeed);
+        if (engineInstance->engineMode == 0)
+            engineInstance->camera.rotate(0, rotationSpeed);
+        else if (engineInstance->engineMode == 1)
+            engineInstance->pyramid.translate(1.0f, 0.0f, 0.0f);
+        else if (engineInstance->engineMode == 2)
+            engineInstance->pyramid.rotate(10.0f, 0.0f, 0.0f, -1.0f);
         break;
     default:
         break;
@@ -180,9 +291,35 @@ void Engine::specialKeys(int key, int x, int y) {
     glutPostRedisplay();
 }
 
+void Engine::checkButtonClick(int x, int y) {  
+    //Ustawienie na tryb kamery
+    if (x >= 2 && x <= 56 && y >= 2 && y <= 32)
+        engineInstance->engineMode = 0;
+    // Ustawienie na przesuwanie obiektu
+    else if (x >= 2 && x <= 56 && y >= 34 && y <= 64) {
+        engineInstance->engineMode = 1;
+    }
+    // Ustawienie na obracanie obiektu
+    else if (x >= 2 && x <= 56 && y >= 66 && y <= 96) {
+        engineInstance->engineMode = 2;
+    }
+    // Ustawienie na skalowanie obiektu
+    else if (x >= 2 && x <= 56 && y >= 98 && y <= 128) {
+        engineInstance->engineMode = 3;
+    }
+    // Wlaczanie i wylaczanie swiatla
+    else if (x >= 2 && x <= 56 && y >= 130 && y <= 160) {
+        // Wlaczenie i wylaczenie swiatla
+    }
+    // Wlaczanie i wylaczanie cieni
+    else if (x >= 2 && x <= 56 && y >= 162 && y <= 192) {
+        // Wlaczenie i wylaczenie cieni
+    }
+}
+
 void Engine::mouse(int button, int state, int x, int y) {
-     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-         std::cout << "Wcisnieto lewy przyycisk" << std::endl;
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        checkButtonClick(x, y);
  }
 
 void Engine::timer(int value) {
@@ -256,6 +393,7 @@ int main(int argc, char** argv) {
     Engine& engine = Engine::getInstance(argc, argv);
     //Wskaznik do niego
     Engine::engineInstance = &Engine::getInstance(argc, argv);
+    //Engine::engineInstance = &engine;
     engine.setFullscreen(false);
     engine.setWindowSize(1024, 768);
     engine.setFPS(60);

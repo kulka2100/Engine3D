@@ -32,6 +32,8 @@ private:
     bool useDepthBuffer;
     bool running;
     Camera camera;
+    Pyramid pyramid;
+    int engineMode;
     
 
     static GLfloat clearColor[4];
@@ -51,6 +53,8 @@ private:
 
     static void timer(int value);
 
+    static void checkButtonClick(int x, int y);
+
 
     void update() {
         // Aktualizacja logiki gry
@@ -59,13 +63,17 @@ private:
     //Metoda sluzaca do okreslenia trybu wyswietlania
     int getDisplayMode();
     
-
+/*
     Engine(int argc, char** argv) {
+        glutInit(&argc, argv);
+    }*/
+    Engine(int argc, char** argv) : pyramid(4.0f), windowId(-1), fullscreen(false), width(800), height(600), fps(60), useMouse(true), useKeyboard(true), doubleBuffering(true), useDepthBuffer(true), running(true) {
         glutInit(&argc, argv);
     }
     void drawControlPanel();
 
 public:
+    
 
     //Wskaznika na obiekt silnika
     static Engine* engineInstance;
@@ -140,8 +148,6 @@ public:
     }
 
 
-    
-   
 
     //Czyszczenie pamieci
     void close();

@@ -26,9 +26,7 @@ private:
     void initVertices();
     
 public:
-    Pyramid(float size) : size(size) {
-        initVertices();
-    }
+    Pyramid(float size);
 
     void draw() override;
 
