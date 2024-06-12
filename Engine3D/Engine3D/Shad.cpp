@@ -2,16 +2,17 @@
 
 
 void Shad::init() {
-    glEnable(GL_DEPTH_TEST); // W³¹cz test g³êbokoœci
+    glEnable(GL_DEPTH_TEST); // W³¹cz z-buffer
     glEnable(GL_LIGHTING);   // W³¹cz oœwietlenie
-    glEnable(GL_LIGHT0);     // W³¹cz pierwsze Ÿród³o œwiat³a
+
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, glm::value_ptr(lightAmbient));
 
     //Wlaczanie skladowych oswietlenia ambient, diffuse, specular
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(lightDiffuse));
     glLightfv(GL_LIGHT0, GL_POSITION, glm::value_ptr(lightPos));
-    glLightfv(GL_LIGHT0, GL_AMBIENT, glm::value_ptr(lightDiffuse));
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(lightAmbient));
     glLightfv(GL_LIGHT0, GL_SPECULAR, glm::value_ptr(lightSpecular));
 
+    glEnable(GL_LIGHT0);     // W³¹cz pierwsze Ÿród³o œwiat³a
 
 
     if (traceColor == true) {
@@ -19,10 +20,11 @@ void Shad::init() {
         glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE); // ŒledŸ ambient i diffuse
     }
     else {
-        //Wlaczanie skladowych materialu ambient, diffuse, specular
+       //Wlaczanie skladowych materialu ambient, diffuse, specular
         glMaterialfv(GL_FRONT, GL_DIFFUSE, glm::value_ptr(matDiffuse));
         glMaterialfv(GL_FRONT, GL_AMBIENT, glm::value_ptr(matAmbient));
         glMaterialfv(GL_FRONT, GL_SPECULAR, glm::value_ptr(matSpecular));
+        glMateriali(GL_FRONT, GL_SHININESS, shininess);
     }
 
 }
@@ -61,5 +63,9 @@ void Shad::setMatAmbient(glm::vec4 matAmbient) {
 
 void Shad::setMatSpecular(glm::vec4 specular) {
     matSpecular = specular;
+}
+
+void Shad::setMatShininess(int shinines){
+    this->shininess = shinines;
 }
 

@@ -333,18 +333,8 @@ void Engine::display() {
      glDisable(GL_TEXTURE_2D);
 
      Sphere sp(10.0, 60, 60);
-
      sp.translate(0.0f, 0.0f, -30.0f);
      sp.draw();
-
-
-
-     /*
-     Cube cube(150.0f);
-     cube.setPosition(0.0f, 0.0f, -5.0f);
-     cube.setFullColor(0.0, 1.0, 1.0);
-     cube.draw();
-     */
 
      glutSwapBuffers();
    
@@ -530,13 +520,8 @@ void Engine::createWindow(const char* title) {
     //Ustawianie parametrow oswietlenia
     Shad shad;
     shad.setTraceColor(false);
-    shad.setLightAmbient(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f));
-    shad.setLightDiffuse(glm::vec4(1.0f, 0.1f, 0.1f, 1.0f));
-    shad.setLightSpecular(glm::vec4(0.4f, 0.4f, 0.3f, 1.0f));
-
-    shad.setMatDiffuse(glm::vec4(0.0, 0.0, 1.0, 1.0));
-    shad.setMatAmbient(glm::vec4(1.0, 1.0, 1.0, 1.0));
-    shad.setMatSpecular(glm::vec4(1.0, 1.0, 1.0, 1.0));
+    shad.setMatDiffuse(glm::vec4(1.0, 0.0f, 1.0f, 1.0f));
+    shad.setMatShininess(8);
 
     shad.init();
 
@@ -582,7 +567,7 @@ int main(int argc, char** argv) {
     engine.setKeyboardEnabled(true);
     engine.setDoubleBuffering(true);
     engine.setDepthBuffer(true);
-    
+   
     //engine.setClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
     engine.createWindow("OpenGL Engine");
