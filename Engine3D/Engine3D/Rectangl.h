@@ -1,4 +1,5 @@
 #pragma once
+#include "BitmapHandler.h"
 #include <GL/freeglut.h>
 #include <iostream>
 #include <glm.hpp>

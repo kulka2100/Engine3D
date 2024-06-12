@@ -1,4 +1,6 @@
 #pragma comment(lib, "freeglut.lib")
+#include "BitmapHandler.h"
+#include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <iostream>
 #include <glm.hpp>
@@ -6,6 +8,7 @@
 #include <ext/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale
 #include <ext/matrix_clip_space.hpp> // glm::perspective
 #include <ext/scalar_constants.hpp>
+#include <gtc/matrix_transform.hpp>
 #include "Cube.h"
 #include "Sphere.h"
 #include "Circle.h"
@@ -16,6 +19,7 @@
 #include <GL/glut.h>
 #include "Camera.h"
 #include "Pyramid.h"
+
 
 
 class Engine {
@@ -35,6 +39,9 @@ private:
     Pyramid pyramid;
     int engineMode;
     bool lightEnabled;
+    BitmapHandler textureHandler;
+    GLuint textureID;
+
     
 
     static GLfloat clearColor[4];

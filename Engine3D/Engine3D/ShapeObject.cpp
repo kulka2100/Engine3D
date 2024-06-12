@@ -1,7 +1,6 @@
 #include "ShapeObject.h"
 
 ShapeObject::ShapeObject() : modelMatrix(glm::mat4(1.0f)) {}
-//ShapeObject::ShapeObject() {}
 
 ShapeObject::~ShapeObject() {}
 
@@ -21,3 +20,4 @@ void ShapeObject::rotate(float angle, float rx, float ry, float rz) {
 void ShapeObject::translate(float tx, float ty, float tz) {
     modelMatrix = glm::translate(modelMatrix, glm::vec3(tx, ty, tz));
 }
+

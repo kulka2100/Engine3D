@@ -1,6 +1,5 @@
 #include "Engine.h"
 
-
 //Inicjalizacje
 GLfloat Engine::clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 Engine::ProjectionType Engine::projectionType = Engine::ProjectionType::PERSPECTIVE;
@@ -13,14 +12,12 @@ Engine& Engine::getInstance(int argc, char** argv) {
     return instance;
 }
 
-
 void Engine::setClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a) {
     clearColor[0] = r;
     clearColor[1] = g;
     clearColor[2] = b;
     clearColor[3] = a;
 }
-
 
 void drawButton(GLuint textureID, int x, int y, int width, int height) {
     // Rysuj teksturê przycisku na panelu kontrolnym
@@ -159,15 +156,18 @@ void Engine::drawControlPanel() {
     glPopMatrix();
 }
 
+
 void Engine::display() {
      
-     glClearColor(getRed(), getGreen(), getBlue(), getAlpha()); // Ustawienie koloru t³a
+     //glClearColor(getRed(), getGreen(), getBlue(), getAlpha()); // Ustawienie koloru t³a
+     glClearColor(0 / 255.0f, 150 / 255.0f, 255 / 255.0f, 1.0f);
      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
      glLoadIdentity();
 
 
      glm::mat4 view = engineInstance->camera.getViewMatrix();
      glLoadMatrixf(glm::value_ptr(view));
+
 
      if (engineInstance->lightEnabled) {
          glEnable(GL_LIGHTING);
@@ -181,11 +181,163 @@ void Engine::display() {
 
      engineInstance->pyramid.draw();
 
+     // Rysowanie szeœcianu
+     Cube room(1.0f);
+     Cube box(1.0f);
+     glEnable(GL_TEXTURE_2D);
+
+     // Bottom
+     room.loadTexture("../Textures/grass.jpg");
+     glBindTexture(GL_TEXTURE_2D, room.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-50.0f, -10.0f, -50.0f);
+     glTexCoord2f(5.0f, 0.0f); glVertex3f(50.0f, -10.0f, -50.0f);
+     glTexCoord2f(5.0f, 5.0f); glVertex3f(50.0f, -10.0f, 50.0f);
+     glTexCoord2f(0.0f, 5.0f); glVertex3f(-50.0f, -10.0f, 50.0f);
+     glEnd();
+
+     // Top face
+     room.loadTexture("../Textures/sky.jpg");
+     glBindTexture(GL_TEXTURE_2D, room.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-50.0f, 60.0f, -50.0f);
+     glTexCoord2f(1.0f, 0.0f); glVertex3f(50.0f, 60.0f, -50.0f);
+     glTexCoord2f(1.0f, 1.0f); glVertex3f(50.0f, 60.0f, 50.0f);
+     glTexCoord2f(0.0f, 1.0f); glVertex3f(-50.0f, 60.0f, 50.0f);
+     glEnd();
+
+     // Front face
+     room.loadTexture("../Textures/mur.jpg");
+     glBindTexture(GL_TEXTURE_2D, room.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-50.0f, -10.0f, 50.0f);
+     glTexCoord2f(5.0f, 0.0f); glVertex3f(50.0f, -10.0f, 50.0f);
+     glTexCoord2f(5.0f, 5.0f); glVertex3f(50.0f, 60.0f, 50.0f);
+     glTexCoord2f(0.0f, 5.0f); glVertex3f(-50.0f, 60.0f, 50.0f);
+     glEnd();
+
+     // Back face
+     room.loadTexture("../Textures/mur.jpg");
+     glBindTexture(GL_TEXTURE_2D, room.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-50.0f, -10.0f, -50.0f);
+     glTexCoord2f(5.0f, 0.0f); glVertex3f(50.0f, -10.0f, -50.0f);
+     glTexCoord2f(5.0f, 5.0f); glVertex3f(50.0f, 60.0f, -50.0f);
+     glTexCoord2f(0.0f, 5.0f); glVertex3f(-50.0f, 60.0f, -50.0f);
+     glEnd();
+
+     // Left face
+     room.loadTexture("../Textures/mur.jpg");
+     glBindTexture(GL_TEXTURE_2D, room.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-50.0f, -10.0f, -50.0f);
+     glTexCoord2f(5.0f, 0.0f); glVertex3f(-50.0f, -10.0f, 50.0f);
+     glTexCoord2f(5.0f, 5.0f); glVertex3f(-50.0f, 60.0f, 50.0f);
+     glTexCoord2f(0.0f, 5.0f); glVertex3f(-50.0f, 60.0f, -50.0f);
+     glEnd();
+
+     // Right face
+     room.loadTexture("../Textures/mur.jpg");
+     glBindTexture(GL_TEXTURE_2D, room.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(50.0f, -10.0f, -50.0f);
+     glTexCoord2f(5.0f, 0.0f); glVertex3f(50.0f, -10.0f, 50.0f);
+     glTexCoord2f(5.0f, 5.0f); glVertex3f(50.0f, 60.0f, 50.0f);
+     glTexCoord2f(0.0f, 5.0f); glVertex3f(50.0f, 60.0f, -50.0f);
+     glEnd();
+
+     // Dodanie skrzynek
+     box.loadTexture("../Textures/box.jpg");
+     glBindTexture(GL_TEXTURE_2D, box.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-50.0f, -10.0f, -40.0f);
+     glTexCoord2f(1.0f, 0.0f); glVertex3f(-40.0f, -10.0f, -40.0f);
+     glTexCoord2f(1.0f, 1.0f); glVertex3f(-40.0f, 0.0f, -40.0f);
+     glTexCoord2f(0.0f, 1.0f); glVertex3f(-50.0f, 0.0f, -40.0f);
+     glEnd();
+     
+     // Dodanie skrzynek
+     box.loadTexture("../Textures/box.jpg");
+     glBindTexture(GL_TEXTURE_2D, box.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-40.0f, -10.0f, -40.0f);
+     glTexCoord2f(1.0f, 0.0f); glVertex3f(-30.0f, -10.0f, -40.0f);
+     glTexCoord2f(1.0f, 1.0f); glVertex3f(-30.0f, 0.0f, -40.0f);
+     glTexCoord2f(0.0f, 1.0f); glVertex3f(-40.0f, 0.0f, -40.0f);
+     glEnd();
+
+     box.loadTexture("../Textures/box.jpg");
+     glBindTexture(GL_TEXTURE_2D, box.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-30.0f, -10.0f, -50.0f);
+     glTexCoord2f(1.0f, 0.0f); glVertex3f(-30.0f, -10.0f, -40.0f);
+     glTexCoord2f(1.0f, 1.0f); glVertex3f(-30.0f, 0.0f, -40.0f);
+     glTexCoord2f(0.0f, 1.0f); glVertex3f(-30.0f, 0.0f, -50.0f);
+     glEnd();
+
+     box.loadTexture("../Textures/box.jpg");
+     glBindTexture(GL_TEXTURE_2D, box.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-50.0f, 0.0f, -50.0f);
+     glTexCoord2f(1.0f, 0.0f); glVertex3f(-40.0f, 0.0f, -50.0f);
+     glTexCoord2f(1.0f, 1.0f); glVertex3f(-40.0f, 0.0f, -40.0f);
+     glTexCoord2f(0.0f, 1.0f); glVertex3f(-50.0f, 0.0f, -40.0f);
+     glEnd();
+
+     box.loadTexture("../Textures/box.jpg");
+     glBindTexture(GL_TEXTURE_2D, box.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-40.0f, 0.0f, -50.0f);
+     glTexCoord2f(1.0f, 0.0f); glVertex3f(-30.0f, 0.0f, -50.0f);
+     glTexCoord2f(1.0f, 1.0f); glVertex3f(-30.0f, 0.0f, -40.0f);
+     glTexCoord2f(0.0f, 1.0f); glVertex3f(-40.0f, 0.0f, -40.0f);
+     glEnd();
+
+     box.loadTexture("../Textures/box.jpg");
+     glBindTexture(GL_TEXTURE_2D, box.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-45.0f, 0.0f, -50.0f);
+     glTexCoord2f(1.0f, 0.0f); glVertex3f(-45.0f, 0.0f, -40.0f);
+     glTexCoord2f(1.0f, 1.0f); glVertex3f(-45.0f, 10.0f, -40.0f);
+     glTexCoord2f(0.0f, 1.0f); glVertex3f(-45.0f, 10.0f, -50.0f);
+     glEnd();
+
+     box.loadTexture("../Textures/box.jpg");
+     glBindTexture(GL_TEXTURE_2D, box.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-35.0f, 0.0f, -50.0f);
+     glTexCoord2f(1.0f, 0.0f); glVertex3f(-35.0f, 0.0f, -40.0f);
+     glTexCoord2f(1.0f, 1.0f); glVertex3f(-35.0f, 10.0f, -40.0f);
+     glTexCoord2f(0.0f, 1.0f); glVertex3f(-35.0f, 10.0f, -50.0f);
+     glEnd();
+
+     box.loadTexture("../Textures/box.jpg");
+     glBindTexture(GL_TEXTURE_2D, box.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-45.0f, 10.0f, -50.0f);
+     glTexCoord2f(1.0f, 0.0f); glVertex3f(-35.0f, 10.0f, -50.0f);
+     glTexCoord2f(1.0f, 1.0f); glVertex3f(-35.0f, 10.0f, -40.0f);
+     glTexCoord2f(0.0f, 1.0f); glVertex3f(-45.0f, 10.0f, -40.0f);
+     glEnd();
+
+     box.loadTexture("../Textures/box.jpg");
+     glBindTexture(GL_TEXTURE_2D, box.getTextureID());
+     glBegin(GL_QUADS);
+     glTexCoord2f(0.0f, 0.0f); glVertex3f(-45.0f, 0.0f, -40.0f);
+     glTexCoord2f(1.0f, 0.0f); glVertex3f(-35.0f, 0.0f, -40.0f);
+     glTexCoord2f(1.0f, 1.0f); glVertex3f(-35.0f, 10.0f, -40.0f);
+     glTexCoord2f(0.0f, 1.0f); glVertex3f(-45.0f, 10.0f, -40.0f);
+     glEnd();
+
+
+     glDisable(GL_TEXTURE_2D);
 
      Sphere sp(10.0, 60, 60);
 
      sp.translate(0.0f, 0.0f, -30.0f);
      sp.draw();
+
+
 
      /*
      Cube cube(150.0f);
@@ -215,7 +367,6 @@ void Engine::reshape(int w, int h) {
         glMatrixMode(GL_MODELVIEW);
     }
 }
-
 
 void Engine::keyboard(unsigned char key, int x, int y) {
     float cameraSpeed = 0.5f;
@@ -407,6 +558,8 @@ void Engine::close() {
     // Zamkniêcie okna i wyjœcie z trybu pe³noekranowego, jeœli jest w³¹czony
     glutLeaveGameMode();
 
+
+
     // Usuniêcie okna, jeœli zosta³o utworzone
     if (windowId != -1) {
         glutDestroyWindow(windowId);
@@ -416,8 +569,6 @@ void Engine::close() {
     // Zakoñczenie biblioteki GLUT
     glutExit();
 }
-
-
 
 int main(int argc, char** argv) {
     //Obiekt engine
@@ -431,6 +582,7 @@ int main(int argc, char** argv) {
     engine.setKeyboardEnabled(true);
     engine.setDoubleBuffering(true);
     engine.setDepthBuffer(true);
+    
     //engine.setClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
     engine.createWindow("OpenGL Engine");

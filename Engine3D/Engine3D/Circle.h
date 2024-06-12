@@ -1,9 +1,11 @@
 #pragma once
+#include "BitmapHandler.h"
 #include <GL/freeglut.h>
 #include <iostream>
 #include <glm.hpp>
 #include <vec4.hpp>
 #include "ShapeObject.h"
+
 
 class Circle : public ShapeObject {
 private:

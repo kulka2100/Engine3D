@@ -1,8 +1,10 @@
 #pragma once
+#include "BitmapHandler.h"
 #include <GL/freeglut.h>
 #include <vector>
 #include <ext/matrix_transform.hpp> 
 #include "ShapeObject.h"
+
 
 class Cube : public ShapeObject {
 private:
@@ -40,7 +42,5 @@ public:
 
     //Metoda ustawiajaca kolor calego szescianu
     void setFullColor(float r, float g, float b);
-
-
 
 };
