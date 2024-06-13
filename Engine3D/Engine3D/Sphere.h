@@ -13,24 +13,19 @@ private:
     float radius;
     unsigned int rings;
     unsigned int sectors;
-    std::vector<GLfloat> vertices;
-    std::vector<GLuint> indices;
-    std::vector<GLfloat> colors;
-
-    
-    void generateVertices();
-
-
+    glm::vec3 colors = {0.5, 0.5, 0.0};
+    bool solid;
 
 public:
     Sphere(float radius, unsigned int rings, unsigned int sectors)
-        : radius(radius), rings(rings), sectors(sectors) {
-        generateVertices();
+        : radius(radius), rings(rings), sectors(sectors), solid(false) {
     }
 
 
     void draw() override;
 
+    //Metoda ustawiajaca typ Sfery (SOLID/ WIRED)
+    void isSolid(bool solid);
 
     void setColor(float red, float green, float blue);
     

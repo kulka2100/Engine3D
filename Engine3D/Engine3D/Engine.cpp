@@ -167,13 +167,6 @@ void Engine::display() {
      glLoadMatrixf(glm::value_ptr(view));
 
 
-     if (engineInstance->lightEnabled) {
-         glEnable(GL_LIGHTING);
-     }
-     else {
-         glDisable(GL_LIGHTING);
-     }
-
      // Rysowanie panelu kontrolnego
      engineInstance->drawControlPanel();
 
@@ -330,10 +323,10 @@ void Engine::display() {
 
      glDisable(GL_TEXTURE_2D);
 
-     Sphere sp(10.0, 60, 60);
-     sp.translate(0.0f, 0.0f, -30.0f);
+     Sphere sp(0.5, 60, 60);
+     sp.isSolid(true);
+     sp.setPosition(0.5, -2.0, -5.0);
      sp.draw();
-     
 
      glutSwapBuffers();
    
