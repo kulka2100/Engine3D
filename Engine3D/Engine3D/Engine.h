@@ -39,15 +39,14 @@ private:
     Pyramid pyramid;
     int engineMode;
     bool lightEnabled;
+    bool flatShading;
     BitmapHandler textureHandler;
     GLuint textureID;
-
-    
+      
 
     static GLfloat clearColor[4];
     enum ProjectionType{ PERSPECTIVE, ORTHOGRAPHIC }; // Typ wyliczeniowy do okreœlenia rodzaju rzutowania
     static ProjectionType projectionType; // Pole przechowuj¹ce aktualne rzutowanie
-
 
     static void display();
 
@@ -75,7 +74,8 @@ private:
     Engine(int argc, char** argv) {
         glutInit(&argc, argv);
     }*/
-    Engine(int argc, char** argv) : pyramid(4.0f), windowId(-1), fullscreen(false), width(800), height(600), fps(60), useMouse(true), useKeyboard(true), doubleBuffering(true), useDepthBuffer(true), running(true), lightEnabled(false) {
+    Engine(int argc, char** argv) : pyramid(4.0f), windowId(-1), fullscreen(false), width(800), height(600), fps(60), useMouse(true),
+                                    useKeyboard(true), doubleBuffering(true), useDepthBuffer(true), running(true), lightEnabled(false), flatShading(false) {
         glutInit(&argc, argv);
     }
     void drawControlPanel();
@@ -154,7 +154,6 @@ public:
     static ProjectionType getProjectionType() {
         return projectionType;
     }
-
 
 
     //Czyszczenie pamieci

@@ -1,10 +1,8 @@
 #include "Engine.h"
-
 //Inicjalizacje
 GLfloat Engine::clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 Engine::ProjectionType Engine::projectionType = Engine::ProjectionType::PERSPECTIVE;
 Engine* Engine::engineInstance = nullptr;
-
 Engine& Engine::getInstance(int argc, char** argv) {
 
     static Engine instance(argc, argv); // Tworzenie nowej instancji tylko jeœli nie istnieje jeszcze ¿adna
@@ -335,6 +333,7 @@ void Engine::display() {
      Sphere sp(10.0, 60, 60);
      sp.translate(0.0f, 0.0f, -30.0f);
      sp.draw();
+     
 
      glutSwapBuffers();
    
@@ -462,6 +461,7 @@ void Engine::checkButtonClick(int x, int y) {
     // Wlaczanie i wylaczanie cieni
     else if (x >= 2 && x <= 56 && y >= 162 && y <= 192) {
         // Wlaczenie i wylaczenie cieni
+        engineInstance->engineMode = 5;
     }
 }
 
@@ -481,6 +481,19 @@ void Engine::mouse(int button, int state, int x, int y) {
             }
             engineInstance->engineMode = 0;
           }
+
+    }
+
+    if (engineInstance->engineMode == 5) {
+        engineInstance->flatShading = !(engineInstance->flatShading);
+        if (engineInstance->flatShading) {
+            glShadeModel(GL_SMOOTH);
+        }
+        else {
+            glShadeModel(GL_FLAT);
+
+        }
+        engineInstance->engineMode = 0;
 
     }
      
