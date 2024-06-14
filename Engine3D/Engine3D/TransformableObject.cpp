@@ -1,6 +1,5 @@
 #include "TransformableObject.h"
 
-//TransformableObject::TransformableObject() {}
 
 TransformableObject::TransformableObject() : modelMatrix(glm::mat4(1.0f)) {}
 
